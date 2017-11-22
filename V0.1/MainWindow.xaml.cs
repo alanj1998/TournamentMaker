@@ -23,6 +23,7 @@ namespace V0._1
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Random randVar = new Random(); //Static randomiser added at the top so that only one randomiser is created for an instance of the programme
         public int MyProperty;
         public MainWindow()
         {
@@ -78,7 +79,7 @@ namespace V0._1
          */
         private List<string>[] GetPots()
         {
-            DB database = new DB("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Alan\\Documents\\Visual Studio 2017\\Projects\\TournamentMaker\\V0.1\\Tournament.mdf\";Integrated Security=True");
+            DB database = new DB("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=" + System.Environment.CurrentDirectory + "\\Tournament.mdf;Integrated Security=True");
             database.AddQuery("SelectTeams", "EXEC SelectRussia2018Teams");
             DataTable dt = new DataTable();
             dt = database.RunQuery("SelectTeams");
@@ -116,7 +117,7 @@ namespace V0._1
          */
         private int Randomizer(int max)
         {
-            return new Random(new Random().Next()).Next(0, max);
+            return randVar.Next(max);      
         }
     }
 
