@@ -84,29 +84,32 @@ namespace V0._1
             DataTable dt = new DataTable();
             dt = database.RunQuery("SelectTeams");
 
-            List<string>[] pots = { new List<string>(), new List<string>(), new List<string>(), new List<string>()};
-
-            foreach (DataRow data in dt.Rows)
+            InternationalTeam[] worldCupTeams = new InternationalTeam[32];
+            for(int i =0; i < dt.Rows.Count; i++)
             {
-                switch (data.Field<Int16>(1))
+                worldCupTeams[i] = new InternationalTeam(dt.Rows[i][0].ToString(), int.Parse(dt.Rows[i][1].ToString()), dt.Rows[i][2].ToString());
+            }
+           
+            List<string>[] pots = { new List<string>(), new List<string>(), new List<string>(), new List<string>()};
+            
+            foreach(InternationalTeam team in worldCupTeams)
+            {
+                switch(team.Pot)
                 {
                     case 1:
-                        pots[0].Add(data.Field<string>(0));
+                        pots[0].Add(team.Name);
                         break;
                     case 2:
-                        pots[1].Add(data.Field<string>(0));
+                        pots[1].Add(team.Name);
                         break;
                     case 3:
-                        pots[2].Add(data.Field<string>(0));
+                        pots[2].Add(team.Name);
                         break;
                     case 4:
-                        pots[3].Add(data.Field<string>(0));
-                        break;
-                    default:
+                        pots[3].Add(team.Name);
                         break;
                 }
             }
-
             return pots;
         }
 

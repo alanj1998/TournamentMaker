@@ -11,6 +11,14 @@ namespace V0._1
         private string name;
         private string league;
 
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+        }
+
         public Team(string Name, string league = "")
         {
             this.name = Name;
@@ -25,7 +33,15 @@ namespace V0._1
     {
         private int pot;
 
-        public InternationalTeam(string Name, string League, int Pot) : base(Name, League)
+        public int Pot
+        {
+            get
+            {
+                return this.pot;
+            }
+        }
+
+        public InternationalTeam(string Name, int Pot, string League = "") : base(Name, League)
         {
             this.pot = Pot;
         }               
